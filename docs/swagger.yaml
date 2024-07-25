@@ -1,0 +1,59 @@
+definitions:
+  controller.GenerateSongRequest:
+    properties:
+      prompt:
+        description: 歌词
+        type: string
+      tags:
+        description: 风格、元素
+        type: string
+      title:
+        description: 歌名
+        type: string
+    required:
+    - prompt
+    - tags
+    - title
+    type: object
+  controller.Response:
+    properties:
+      code:
+        type: integer
+      data:
+        type: object
+      msg:
+        type: string
+    type: object
+info:
+  contact: {}
+  license: {}
+  title: Suno AI API
+  version: v1.0
+paths:
+  /api/v1/generate/song:
+    post:
+      description: 通过歌词、歌名、风格元素、生成2首AI音乐。时间较长，一般在2～6分钟出结果。
+      parameters:
+      - description: Request Body
+        in: body
+        name: GenerateSongRequest
+        required: true
+        schema:
+          $ref: '#/definitions/controller.GenerateSongRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/controller.Response'
+        "400":
+          description: Bad Request
+          schema:
+            $ref: '#/definitions/controller.Response'
+        "500":
+          description: Internal Server Error
+          schema:
+            $ref: '#/definitions/controller.Response'
+      summary: 生成AI音乐
+swagger: "2.0"

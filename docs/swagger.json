@@ -1,0 +1,89 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Suno AI API",
+        "contact": {},
+        "license": {},
+        "version": "v1.0"
+    },
+    "paths": {
+        "/api/v1/generate/song": {
+            "post": {
+                "description": "通过歌词、歌名、风格元素、生成2首AI音乐。时间较长，一般在2～6分钟出结果。",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "生成AI音乐",
+                "parameters": [
+                    {
+                        "description": "Request Body",
+                        "name": "GenerateSongRequest",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/controller.GenerateSongRequest"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Response"
+                        }
+                    },
+                    "500": {
+                        "description": "Internal Server Error",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Response"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "controller.GenerateSongRequest": {
+            "type": "object",
+            "required": [
+                "prompt",
+                "tags",
+                "title"
+            ],
+            "properties": {
+                "prompt": {
+                    "description": "歌词",
+                    "type": "string"
+                },
+                "tags": {
+                    "description": "风格、元素",
+                    "type": "string"
+                },
+                "title": {
+                    "description": "歌名",
+                    "type": "string"
+                }
+            }
+        },
+        "controller.Response": {
+            "type": "object",
+            "properties": {
+                "code": {
+                    "type": "integer"
+                },
+                "data": {
+                    "type": "object"
+                },
+                "msg": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
