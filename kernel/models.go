@@ -180,14 +180,14 @@ type GetJwtResponse struct {
 type GenerateSongResponse struct {
 	Id    string `json:"id"`
 	Clips []struct {
-		Id                string      `json:"id"`
-		VideoUrl          string      `json:"video_url"`
-		AudioUrl          string      `json:"audio_url"`
-		ImageUrl          interface{} `json:"image_url"`
-		ImageLargeUrl     interface{} `json:"image_large_url"`
-		IsVideoPending    bool        `json:"is_video_pending"`
-		MajorModelVersion string      `json:"major_model_version"`
-		ModelName         string      `json:"model_name"`
+		Id                string `json:"id"`
+		VideoUrl          string `json:"video_url"`
+		AudioUrl          string `json:"audio_url"`
+		ImageUrl          string `json:"image_url"`
+		ImageLargeUrl     string `json:"image_large_url"`
+		IsVideoPending    bool   `json:"is_video_pending"`
+		MajorModelVersion string `json:"major_model_version"`
+		ModelName         string `json:"model_name"`
 		Metadata          struct {
 			Tags                     string      `json:"tags"`
 			Prompt                   string      `json:"prompt"`

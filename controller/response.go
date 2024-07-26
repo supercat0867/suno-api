@@ -8,8 +8,9 @@ type Response struct {
 
 type SongItem struct {
 	Id            string `json:"id"`
-	VideoUrl      string `json:"video_url"`
-	AudioUrl      string `json:"audio_url"`
-	ImageUrl      string `json:"image_url"`
-	ImageLargeUrl string `json:"image_large_url"`
+	VideoUrl      string `json:"video_url,omitempty"`
+	AudioUrl      string `json:"audio_url,omitempty"`
+	ImageUrl      string `json:"image_url,omitempty"`
+	ImageLargeUrl string `json:"image_large_url,omitempty"`
+	Status        string `json:"status,omitempty"`
 }

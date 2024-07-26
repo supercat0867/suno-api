@@ -25,21 +25,21 @@ var doc = `{
     "host": "{{.Host}}",
     "basePath": "{{.BasePath}}",
     "paths": {
-        "/api/v1/generate/song": {
+        "/api/v1/suno/createTask": {
             "post": {
-                "description": "通过歌词、歌名、风格元素、生成2首AI音乐。时间较长，一般在2～6分钟出结果。",
+                "description": "提交suno生成任务，返回音乐id等信息。",
                 "produces": [
                     "application/json"
                 ],
-                "summary": "生成AI音乐",
+                "summary": "提交音乐生成任务",
                 "parameters": [
                     {
                         "description": "Request Body",
-                        "name": "GenerateSongRequest",
+                        "name": "CreateGenerateSongTaskRequest",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/controller.GenerateSongRequest"
+                            "$ref": "#/definitions/controller.CreateGenerateSongTaskRequest"
                         }
                     }
                 ],
@@ -64,10 +64,42 @@ var doc = `{
                     }
                 }
             }
+        },
+        "/api/v1/suno/getStatus": {
+            "get": {
+                "description": "通过音乐id,查询音乐生成状态",
+                "produces": [
+                    "application/json"
+                ],
+                "summary": "查询音乐生成状态",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "音乐id",
+                        "name": "songId",
+                        "in": "query",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Response"
+                        }
+                    },
+                    "400": {
+                        "description": "Bad Request",
+                        "schema": {
+                            "$ref": "#/definitions/controller.Response"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
-        "controller.GenerateSongRequest": {
+        "controller.CreateGenerateSongTaskRequest": {
             "type": "object",
             "required": [
                 "prompt",
@@ -75,6 +107,10 @@ var doc = `{
                 "title"
             ],
             "properties": {
+                "callBack": {
+                    "description": "回调地址",
+                    "type": "string"
+                },
                 "prompt": {
                     "description": "歌词",
                     "type": "string"

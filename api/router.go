@@ -11,5 +11,6 @@ func RegisterAPIHandler(r *gin.Engine) {
 	contr := controller.NewController(client)
 
 	group := r.Group("/api/v1")
-	group.POST("/generate/song", contr.GenerateSong)
+	group.POST("/suno/createTask", contr.CreateGenerateSongTask)
+	group.GET("/suno/getStatus", contr.GetGenerateSongStatus)
 }
